@@ -1,31 +1,12 @@
-//Esse é um exemplo de implementação da logica do site.
+listaJogos = ["The Witcher 3", "Minecraft", "GTA V", "Dark Souls 3", "League of Legends", "Counter Strike 2", "Red Dead Redemption 2", "Fifa 25", "Stardew Valley", "Hollow Knight"];
 
-const jogos = [
-    { nome: "Dark Souls", genero: ["RPG", "Ação"], multiplayer: false, dificuldade: 5 },
-    { nome: "Elden Ring", genero: ["RPG", "Ação", "Mundo Aberto"], multiplayer: true, dificuldade: 4 },
-    { nome: "The Witcher 3", genero: ["RPG", "Ação", "Mundo Aberto"], multiplayer: false, dificuldade: 3 },
-    { nome: "Bloodborne", genero: ["RPG", "Ação"], multiplayer: true, dificuldade: 5 }
-];
+listaRecomendada = ["", "", "", "", ""];
 
-function jaccardSimilarity(jogo1, jogo2) {
-    let set1 = new Set(jogo1.genero);
-    let set2 = new Set(jogo2.genero);
-    let intersecao = new Set([...set1].filter(x => set2.has(x))).size;
-    let uniao = new Set([...set1, ...set2]).size;
-    return intersecao / uniao;
+console.log(listaRecomendada);
+
+for(let i = 0; i <= 4; i++){
+    listaRecomendada[i] = listaJogos[Math.floor(Math.random() * listaJogos.length)]
+    console.log(`Loop ${i} - ${listaRecomendada[i]}`);
 }
 
-function recomendar(jogoEscolhido) {
-    let jogoBase = jogos.find(j => j.nome === jogoEscolhido);
-    let recomendacoes = jogos
-        .filter(j => j.nome !== jogoEscolhido)
-        .map(j => ({
-            nome: j.nome,
-            similaridade: jaccardSimilarity(jogoBase, j)
-        }))
-        .sort((a, b) => b.similaridade - a.similaridade);
-    
-    return recomendacoes.slice(0, 3); // Retorna os 3 jogos mais similares
-}
-
-console.log(recomendar("Dark Souls"));
+console.log(listaRecomendada);
